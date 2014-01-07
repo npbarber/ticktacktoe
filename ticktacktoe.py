@@ -4,6 +4,7 @@ import itertools
 import re
 import sys
 
+
 class Painter(object):
     def __init__(self, board):
         self.board = board
@@ -16,7 +17,8 @@ class Painter(object):
         print '\n    A | B | C'
         print '  ------------'
         for i, r in enumerate(self.board.data):
-            print '%s | %s | %s | %s' % (i+1, r[0] or ' ', r[1] or ' ', r[2] or ' ')
+            print '%s | %s | %s | %s' % (i + 1, r[0] or ' ',
+                                         r[1] or ' ', r[2] or ' ')
             print '  |---|---|---'
 
 
@@ -34,7 +36,7 @@ class Prompter(object):
         if not match:
             return None
         col, row = match.groups()
-        cols = ['A','B','C']
+        cols = ['A', 'B', 'C']
         return cols.index(col.upper()), int(row) - 1
 
     def prompt(self, player):
@@ -44,6 +46,7 @@ class Prompter(object):
             resp = self.get_input(player)
             resp = self.validate_input(resp)
         return resp
+
 
 class Board(object):
     def __init__(self):
@@ -74,8 +77,8 @@ class Board(object):
         lr = []
         rl = []
         for i in range(3):
-           lr.append(self.data[i][i])
-           rl.append(self.data[i][-i-1])
+            lr.append(self.data[i][i])
+            rl.append(self.data[i][-i - 1])
         if len(set(lr)) == 1 and None not in lr:
             return lr.pop()
         if len(set(rl)) == 1 and None not in rl:
@@ -89,10 +92,12 @@ class Player(object):
         self.name = name
         self.token = token
 
+
 def winner_name_from_token(players, token):
     for player in players:
         if player.token == token:
             return player.name
+
 
 def main():
     board = Board()
